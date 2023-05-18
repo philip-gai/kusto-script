@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  workflow_dispatch: {}
+  pull_request: {}
+  push: { branches: ["main"] }
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  test-action:
+    name: "Test action"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.5.2
+      - uses: Azure/login@v1
+        with:
+          client-id: b63b64a4-12a9-4556-88e4-8863180b982e
+          tenant-id: 87e276c0-7d18-4d86-948a-ba5eea990211
+          allow-no-subscriptions: true
+      - uses: philip-gai/setup-kusto@main
+        with:
+          kusto-version: 11.3.1
+          target-version: net6.0
+      - name: Run action
+        uses: ./
+        with:
+          kusto-uri: "https://philipgai.southcentralus.kusto.windows.net/"
+          kusto-query: ".show tables"
