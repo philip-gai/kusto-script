@@ -23,6 +23,8 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3.5.2
+      with:
+        repository: philip-gai/kusto-script
     - name: Set KUSTO_CLI_PATH
       run: |
         if [ -z "${{ env.KUSTO_CLI_PATH }}" ]; then
