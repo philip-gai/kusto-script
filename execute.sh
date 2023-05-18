@@ -12,8 +12,6 @@ do
     esac
 done
 
-KUSTO_CLI_PATH="${{ env.KUSTO_CLI_PATH }}"
-
 if [ -z "$KUSTO_CLI_PATH" ]; then
     echo "KUSTO_CLI_PATH is not set"
     exit 1
