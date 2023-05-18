@@ -23,6 +23,8 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3.5.2
+      with:
+        path: kusto-script
     - name: Set KUSTO_CLI_PATH
       run: |
         if [ -z "${{ env.KUSTO_CLI_PATH }}" ]; then
@@ -34,7 +36,7 @@ runs:
         fi
       shell: bash
     - name: Execute Kusto script
-      run: execute.sh \
+      run: $GITHUB_WORKSPACE/kusto-script/execute.sh \
             -u '${{ inputs.kusto-uri }}' \
             -t '${{ inputs.azure-tenant }}' \
             -q '${{ inputs.kusto-query }}' \
