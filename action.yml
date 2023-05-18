@@ -34,7 +34,7 @@ runs:
         fi
       shell: bash
     - name: Execute Kusto script
-      run: execute.sh \
+      run: ./execute.sh \
             -u '${{ inputs.kusto-uri }}' \
             -t '${{ inputs.azure-tenant }}' \
             -q '${{ inputs.kusto-query }}' \
