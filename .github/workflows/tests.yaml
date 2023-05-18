@@ -15,8 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.5.2
-        with:
-          path: kusto-script
       - uses: Azure/login@v1
         with:
           client-id: b63b64a4-12a9-4556-88e4-8863180b982e
@@ -27,7 +25,7 @@ jobs:
           kusto-version: 11.3.1
           target-version: net6.0
       - name: Run action
-        uses: $GITHUB_WORKSPACE/kusto-script
+        uses: ./
         with:
           kusto-uri: "https://philipgai.southcentralus.kusto.windows.net/"
           kusto-query: ".show tables"
