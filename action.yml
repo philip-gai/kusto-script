@@ -41,5 +41,5 @@ runs:
             -u '${{ inputs.kusto-uri }}' \
             -t '${{ inputs.azure-tenant }}' \
             -q '${{ inputs.kusto-query }}' \
-            -s '${{ inputs-kusto-script }}'
+            -s '${{ inputs.kusto-script }}'
       shell: bash
