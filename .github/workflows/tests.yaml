@@ -40,9 +40,6 @@ jobs:
           tenant-id: 87e276c0-7d18-4d86-948a-ba5eea990211
           allow-no-subscriptions: true
       - uses: philip-gai/setup-kusto@main
-        with:
-          kusto-version: 11.3.1
-          target-version: net6.0
       - name: Run ${{ matrix.test.kusto-query }} ${{ matrix.test.kusto-script }}
         uses: ./
         with:
