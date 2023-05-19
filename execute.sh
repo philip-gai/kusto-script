@@ -2,6 +2,8 @@
 
 set -e
 
+source utils.sh
+
 while getopts q:s:t:u: flag; do
     case "${flag}" in
     q) query=${OPTARG} ;;
@@ -16,7 +18,6 @@ if [ -z "$KUSTO_CLI_PATH" ]; then
     exit 1
 fi
 
-source utils.sh
 auth=$(get_auth_string $uri $tenant)
 connectionString="$uri;$auth"
 
