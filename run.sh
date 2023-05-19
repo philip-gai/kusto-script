@@ -31,7 +31,7 @@ if [ ! -z "$folders" ]; then
     result=""
     for folder in $folders; do
         echo "Processing folder: $folder"
-        result+=$(deploy_files_recursive "$folder")
+        result+=$(deploy_files_recursive "$folder" "$connectionString" "$result")
     done
 elif [ ! -z "$query" ]; then
     result=$(execute_query "$query" "$connectionString")
