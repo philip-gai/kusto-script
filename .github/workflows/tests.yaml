@@ -40,8 +40,14 @@ jobs:
           tenant-id: 87e276c0-7d18-4d86-948a-ba5eea990211
           allow-no-subscriptions: true
       - uses: philip-gai/setup-kusto@main
-      - name: Run ${{ matrix.test.kusto-query }} ${{ matrix.test.kusto-script }}
+      - name: Run ${{ matrix.test.kusto-query }} ${{ matrix.test.kusto-script }} on local
         uses: ./
+        with:
+          kusto-uri: "${{ matrix.test.kusto-uri }}"
+          kusto-query: "${{ matrix.test.kusto-query }}"
+          kusto-script: "${{ matrix.test.kusto-script }}"
+      - name: Run ${{ matrix.test.kusto-query }} ${{ matrix.test.kusto-script }} on main
+        uses: philip-gai/kusto-script@main
         with:
           kusto-uri: "${{ matrix.test.kusto-uri }}"
           kusto-query: "${{ matrix.test.kusto-query }}"
