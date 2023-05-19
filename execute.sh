@@ -7,7 +7,7 @@ source utils.sh
 while getopts q:s:t:u: flag; do
     case "${flag}" in
     q) query=${OPTARG} ;;
-    s) script=${OPTARG} ;;
+    s) script_relativepath=${OPTARG} ;;
     t) tenant=${OPTARG} ;;
     u) uri=${OPTARG} ;;
     esac
@@ -28,8 +28,8 @@ if [ ! -z "$query" ]; then
     result=$(dotnet $KUSTO_CLI_PATH "$connectionString" \
         -execute:"#markdownon" \
         -execute:"$query")
-elif [ ! -z "$script" ]; then
-    script_fullpath="$GITHUB_WORKSPACE/user-scripts/$script"
+elif [ ! -z "$script_relativepath" ]; then
+    script_fullpath="$GITHUB_WORKSPACE/$script_relativepath"
     echo "Executing script: $script_fullpath"
 
     # Automatically add #markdownon to the top of the script to format output

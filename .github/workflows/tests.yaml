@@ -29,7 +29,7 @@ jobs:
             },
             {
               kusto-uri: "https://philipgai.southcentralus.kusto.windows.net/Test",
-              kusto-script: ".show tables",
+              kusto-script: "kusto-scripts/show-commands.csl",
             },
           ]
     steps:
@@ -43,9 +43,9 @@ jobs:
         with:
           kusto-version: 11.3.1
           target-version: net6.0
-      - name: Test ${{ matrix.test.kusto-query }}
+      - name: Run ${{ matrix.test.kusto-query }} ${{ matrix.test.kusto-script }}
         uses: ./
         with:
-          kusto-uri: "https://philipgai.southcentralus.kusto.windows.net/"
+          kusto-uri: "${{ matrix.test.kusto-uri }}"
           kusto-query: "${{ matrix.test.kusto-query }}"
           kusto-script: "${{ matrix.test.kusto-script }}"
