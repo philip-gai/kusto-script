@@ -31,6 +31,10 @@ jobs:
               kusto-uri: "https://philipgai.southcentralus.kusto.windows.net/Test",
               kusto-script: "kusto-scripts/show-commands.kql",
             },
+            {
+              kusto-uri: "https://philipgai.southcentralus.kusto.windows.net/Test",
+              kusto-script-folders: "kusto-scripts/functions kusto-scripts/views",
+            },
           ]
     steps:
       - uses: actions/checkout@v3.5.2
@@ -52,3 +56,4 @@ jobs:
           kusto-uri: "${{ matrix.test.kusto-uri }}"
           kusto-query: "${{ matrix.test.kusto-query }}"
           kusto-script: "${{ matrix.test.kusto-script }}"
+          kusto-script-folders: "${{ matrix.test.kusto-script-folders }}"
