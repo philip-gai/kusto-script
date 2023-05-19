@@ -1,5 +1,5 @@
 .create-or-alter function with (
-    docstring = 'Returns the CPU SKU mappings for Azure VM Cores',
+    docstring = 'Returns a list of awesome people',
     folder='Functions'
 )
 GetPeople()
