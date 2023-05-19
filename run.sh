@@ -27,7 +27,7 @@ connectionString="$uri;$auth"
 
 echo "Connection string: $connectionString"
 
-if [ ! -z "$folders"]; then
+if [ ! -z "$folders" ]; then
     result=""
     for folder in $folders; do
         echo "Processing folder: $folder"
