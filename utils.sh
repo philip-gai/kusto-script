@@ -6,8 +6,8 @@ function get_auth_string() {
   uri=$1
   tenant=$2
 
-  if [ -z "$uri" ] || [ -z "$tenant" ]; then
-    echo "uri and tenant are required"
+  if [ -z "$uri" ]; then
+    echo "Usage: get_auth_string <uri> <tenant>"
     exit 1
   fi
 
