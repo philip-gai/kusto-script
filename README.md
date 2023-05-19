@@ -2,11 +2,11 @@
 
 [![Tests](https://github.com/philip-gai/kusto-script/actions/workflows/tests.yaml/badge.svg)](https://github.com/philip-gai/kusto-script/actions/workflows/tests.yaml)
 
-Run a Kusto script or inline query against your Kusto cluster in your GitHub Actions workflow
+Run a Kusto script or inline query against your Kusto cluster in your GitHub Actions workflow.
 
 ## Usage
 
-First, authenticate with Azure using `Azure/login` and setup the Kusto CLI using `philip-gai/setup-kusto`. Then you can run an inline query or a a Kusto script using `philip-gai/kusto-script`. If you are running a script, make sure to run `actions/checkout` before `philip-gai/kusto-script` so your script is accessible by the action.
+First, authenticate with Azure using `Azure/login` and setup the Kusto CLI using [`philip-gai/setup-kusto`](https://github.com/philip-gai/setup-kusto). Then you can run an inline query or a a Kusto script using `philip-gai/kusto-script`. If you are running a script, make sure to run `actions/checkout` before `philip-gai/kusto-script` so your script is accessible by the action.
 
 ```yaml
     steps:
