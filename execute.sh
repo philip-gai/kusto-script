@@ -2,7 +2,10 @@
 
 set -e
 
-source utils.sh
+# Path to this script
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+source "$DIR/utils.sh"
 
 while getopts q:s:t:u: flag; do
     case "${flag}" in
