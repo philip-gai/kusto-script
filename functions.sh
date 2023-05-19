@@ -54,7 +54,7 @@ function deploy_files_recursive() {
 
   for file in "$folder"/*; do
     if [ -d "$file" ]; then
-      deploy_files_recursive "$file" "$connectionString" "$result"
+      tmp=$(deploy_files_recursive "$file" "$connectionString" "$result")
     else
       echo "Deploying file $file" >&2
       result+=$(execute_script "$file" "$connectionString")
