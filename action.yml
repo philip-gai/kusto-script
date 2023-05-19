@@ -37,6 +37,7 @@ runs:
         fi
       shell: bash
     - name: Execute Kusto script
+      id: kusto-script
       run: |
         export KUSTO_CLI_PATH="${{ env.KUSTO_CLI_PATH }}"
         ./kusto-script/execute.sh \
