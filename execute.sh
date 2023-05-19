@@ -2,13 +2,12 @@
 
 set -e
 
-while getopts c:d:t:q:s: flag
-do
+while getopts c:d:t:q:s: flag; do
     case "${flag}" in
-        u) uri=${OPTARG};;
-        t) tenant=${OPTARG};;
-        s) script=${OPTARG};;
-        q) query=${OPTARG};;
+    u) uri=${OPTARG} ;;
+    t) tenant=${OPTARG} ;;
+    s) script=${OPTARG} ;;
+    q) query=${OPTARG} ;;
     esac
 done
 
@@ -17,12 +16,13 @@ if [ -z "$KUSTO_CLI_PATH" ]; then
     exit 1
 fi
 
-auth=$(bash auth.sh $uri $tenant)
+source utils.sh
+auth=$(get_auth_string $uri $tenant)
 connectionString="$uri;$auth"
 
 if [ ! -z "$query" ]; then
     echo "Executing query: $query"
-    result=$(dotnet $KUSTO_CLI_PATH  "$connectionString" \
+    result=$(dotnet $KUSTO_CLI_PATH "$connectionString" \
         -execute:"#markdownon" \
         -execute:"$query")
 elif [ ! -z "$script" ]; then
@@ -30,9 +30,9 @@ elif [ ! -z "$script" ]; then
     echo "Executing script: $script_fullpath"
 
     # Automatically add #markdownon to the top of the script to format output
-    echo -e "#markdownon\n"|cat - $script_fullpath > /tmp/out && mv /tmp/out $script_fullpath
+    echo -e "#markdownon\n" | cat - $script_fullpath >/tmp/out && mv /tmp/out $script_fullpath
 
-    result=$(dotnet $KUSTO_CLI_PATH  "$connectionString" \
+    result=$(dotnet $KUSTO_CLI_PATH "$connectionString" \
         -lineMode:false \
         -script:"$script_fullpath")
 else
