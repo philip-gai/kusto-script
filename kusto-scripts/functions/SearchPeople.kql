@@ -1,0 +1,10 @@
+.create-or-alter function with (
+    docstring = 'Searches for people with the provided first and last name',
+    folder='Functions'
+)
+SearchPeople(lastName string, firstName string)
+{
+  PeopleDetails
+  | where isempty(firstName) or FirstName =~ firstName
+  | where isempty(lastName) or LastName =~ lastName
+}
