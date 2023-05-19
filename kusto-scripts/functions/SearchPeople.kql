@@ -2,7 +2,7 @@
     docstring = 'Searches for people with the provided first and last name',
     folder='Functions'
 )
-SearchPeople(lastName string, firstName string)
+SearchPeople(lastName: string = "", firstName: string = "")
 {
   PeopleDetails
   | where isempty(firstName) or FirstName =~ firstName
