@@ -29,7 +29,7 @@ jobs:
             },
             {
               kusto-uri: "https://philipgai.southcentralus.kusto.windows.net/Test",
-              kusto-script: "kusto-scripts/show-commands.csl",
+              kusto-script: "kusto-scripts/show-commands.kql",
             },
           ]
     steps:
