@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   test-action:
-    name: "Run ${{ matrix.test.kusto-query }} ${{ matrix.test.kusto-script }} on ${{ matrix.os }}"
+    name: "Run ${{ matrix.test.kusto-query }} ${{ matrix.test.kusto-script }} ${{ matrix.test.kusto-script-folders }} on ${{ matrix.os }}"
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
