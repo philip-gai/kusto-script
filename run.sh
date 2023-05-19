@@ -5,10 +5,11 @@ set -e
 # Path to this script
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
-source "$DIR/utils.sh"
+source "$DIR/functions.sh"
 
-while getopts q:s:t:u: flag; do
+while getopts f:q:s:t:u: flag; do
     case "${flag}" in
+    f) folders=${OPTARG} ;;
     q) query=${OPTARG} ;;
     s) script_relativepath=${OPTARG} ;;
     t) tenant=${OPTARG} ;;
@@ -26,21 +27,17 @@ connectionString="$uri;$auth"
 
 echo "Connection string: $connectionString"
 
-if [ ! -z "$query" ]; then
-    echo "Executing query: \"$query\""
-    result=$(dotnet $KUSTO_CLI_PATH "$connectionString" \
-        -execute:"#markdownon" \
-        -execute:"$query")
+if [ ! -z "$folders" ]; then
+    result=""
+    for folder in $folders; do
+        echo "Processing folder: $folder"
+        result=$(deploy_files_recursive "$folder" "$connectionString" "$result")
+    done
+elif [ ! -z "$query" ]; then
+    result=$(execute_query "$query" "$connectionString")
 elif [ ! -z "$script_relativepath" ]; then
     script_fullpath="$GITHUB_WORKSPACE/$script_relativepath"
-    echo "Executing script: $script_fullpath"
-
-    # Automatically add #markdownon to the top of the script to format output
-    echo -e "#markdownon\n" | cat - $script_fullpath >/tmp/out && mv /tmp/out $script_fullpath
-
-    result=$(dotnet $KUSTO_CLI_PATH "$connectionString" \
-        -lineMode:false \
-        -script:"$script_fullpath")
+    result=$(execute_script "$script_fullpath" "$connectionString")
 else
     echo "No query or script provided"
     exit 1

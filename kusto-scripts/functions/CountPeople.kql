@@ -1,0 +1,11 @@
+.create-or-alter function with (
+    docstring = "Gets the number of poeple", 
+    folder = "Functions"
+) 
+CountPeople()
+{
+    toscalar(
+      GetPeople
+      | summarize count()
+    )
+}

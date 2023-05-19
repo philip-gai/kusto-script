@@ -12,6 +12,8 @@ inputs:
     description: "The Kusto query to run"
   kusto-script:
     description: "The path to the Kusto script to run"
+  kusto-script-folders:
+    description: "Space separated list of paths to folders contains Kusto scripts. Will recursively run all files in the directory"
   kusto-cli-path:
     description: "The path on the runner to the Kusto CLI"
   azure-tenant:
@@ -36,13 +38,14 @@ runs:
           echo "KUSTO_CLI_PATH=${{ inputs.kusto-cli-path }}" >> $GITHUB_ENV
         fi
       shell: bash
-    - name: Execute Kusto script
+    - name: Execute Kusto script(s)
       id: kusto-script
       run: |
         export KUSTO_CLI_PATH="${{ env.KUSTO_CLI_PATH }}"
-        ./kusto-script/execute.sh \
-            -u '${{ inputs.kusto-uri }}' \
-            -t '${{ inputs.azure-tenant }}' \
+        ./kusto-script/run.sh \
+            -f '${{ inputs.kusto-script-folders }}' \
             -q '${{ inputs.kusto-query }}' \
-            -s '${{ inputs.kusto-script }}'
+            -s '${{ inputs.kusto-script }}' \
+            -t '${{ inputs.azure-tenant }}' \
+            -u '${{ inputs.kusto-uri }}'
       shell: bash
