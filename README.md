@@ -6,7 +6,7 @@ Run a Kusto script or inline query against your Kusto cluster in your GitHub Act
 
 ## Usage
 
-First, authenticate with Azure using `Azure/login` and setup the Kusto CLI using [`philip-gai/setup-kusto`](https://github.com/philip-gai/setup-kusto). Then you can run an inline query or a a Kusto script using `philip-gai/kusto-script`. If you are running a script, make sure to run `actions/checkout` before `philip-gai/kusto-script` so your script is accessible by the action.
+First, authenticate with Azure using `Azure/login` and setup the Kusto CLI using [`philip-gai/setup-kusto`](https://github.com/philip-gai/setup-kusto). Then you can run an inline query or a a Kusto script using `philip-gai/kusto-script`. If you are running a script, make sure to run `actions/checkout` before `philip-gai/kusto-script` so your script is accessible by the action. You can also deploy functions and views by passing in `kusto-script-folders`.
 
 ```yaml
     steps:
@@ -18,13 +18,18 @@ First, authenticate with Azure using `Azure/login` and setup the Kusto CLI using
           allow-no-subscriptions: true
       - uses: philip-gai/setup-kusto@v1
       - name: Run inline query
-        uses: philip-gai/kusto-script@v1
+        uses: philip-gai/kusto-script@main # Replace @main with @tag
         with:
           kusto-uri: ${{ env.KUSTO_URI }} # Example: https://mycluster.kusto.windows.net or https://mycluster.kusto.windows.net/MyDatabase
           kusto-query: ".show databases"
-      - name: Run Kusto script
-        uses: philip-gai/kusto-script@v1
+      - name: Run a single Kusto script
+        uses: philip-gai/kusto-script@main # Replace @main with @tag
         with:
           kusto-uri: ${{ env.KUSTO_URI }} # Example: https://mycluster.kusto.windows.net or https://mycluster.kusto.windows.net/MyDatabase
-          kusto-script: "path/to/script.kql" # Relative to the repository root
+          kusto-script: "kusto-scripts/show-commands.kql" # Relative to the repository root
+      - name: Deploy functions and views
+        uses: philip-gai/kusto-script@main # Replace @main with @tag
+        with:
+          kusto-uri: ${{ env.KUSTO_URI }} # Example: https://mycluster.kusto.windows.net or https://mycluster.kusto.windows.net/MyDatabase
+          kusto-script-folders: "kusto-scripts/functions kusto-scripts/views" # Relative to the repository root. Space separated list of folders.
 ```
