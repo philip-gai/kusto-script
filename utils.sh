@@ -9,6 +9,12 @@ function get_auth_string() {
     return 1
   fi
 
+  # Remove anything after the last '/' in the uri
+  num_forward_slashes=$(grep -o '/' <<<"$uri" | grep -c .)
+  if [ $num_forward_slashes -gt 2 ]; then
+    uri="${uri%/*}"
+  fi
+
   # Get user token from az cli
   echo "Getting Access token to $uri" >&2
   token=$(az account get-access-token --resource=$uri --query accessToken --output tsv)
@@ -18,7 +24,9 @@ function get_auth_string() {
     return 1
   fi
 
-  echo "::add-mask::$token" >&2
+  if [ ! -z "$CI" ]; then
+    echo "::add-mask::$token" >&2
+  fi
   auth="Fed=true;AppToken=$token;"
 
   if [ ! -z "$tenant" ]; then

@@ -44,4 +44,7 @@ else
 fi
 
 echo "$result"
-echo "result=$result" >>$GITHUB_OUTPUT
+
+if [ ! -z "$CI" ]; then
+    echo "result=$result" >>$GITHUB_OUTPUT
+fi

@@ -24,8 +24,13 @@ jobs:
         with:
           kusto-version: 11.3.1
           target-version: net6.0
-      - name: Run action
+      - name: Test .show databases
         uses: ./
         with:
           kusto-uri: "https://philipgai.southcentralus.kusto.windows.net/"
+          kusto-query: ".show databases"
+      - name: Test .show tables
+        uses: ./
+        with:
+          kusto-uri: "https://philipgai.southcentralus.kusto.windows.net/Test"
           kusto-query: ".show tables"
