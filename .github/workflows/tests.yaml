@@ -51,9 +51,3 @@ jobs:
           kusto-query: "${{ matrix.test.kusto-query }}"
           kusto-script: "${{ matrix.test.kusto-script }}"
           kusto-script-folders: "${{ matrix.test.kusto-script-folders }}"
-      - name: Run ${{ matrix.test.kusto-query }} ${{ matrix.test.kusto-script }} on main
-        uses: philip-gai/kusto-script@main
-        with:
-          kusto-uri: "${{ matrix.test.kusto-uri }}"
-          kusto-query: "${{ matrix.test.kusto-query }}"
-          kusto-script: "${{ matrix.test.kusto-script }}"
