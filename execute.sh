@@ -2,12 +2,12 @@
 
 set -e
 
-while getopts c:d:t:q:s: flag; do
+while getopts q:s:t:u: flag; do
     case "${flag}" in
-    u) uri=${OPTARG} ;;
-    t) tenant=${OPTARG} ;;
-    s) script=${OPTARG} ;;
     q) query=${OPTARG} ;;
+    s) script=${OPTARG} ;;
+    t) tenant=${OPTARG} ;;
+    u) uri=${OPTARG} ;;
     esac
 done
 
