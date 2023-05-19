@@ -50,4 +50,5 @@ if [ ! -z "$CI" ]; then
     echo "result<<EOF" >>$GITHUB_OUTPUT
     echo "$result" >>$GITHUB_OUTPUT
     echo "EOF" >>$GITHUB_OUTPUT
+    echo "$result" >> $GITHUB_STEP_SUMMARY
 fi
