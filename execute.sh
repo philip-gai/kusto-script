@@ -21,8 +21,10 @@ fi
 auth=$(get_auth_string $uri $tenant)
 connectionString="$uri;$auth"
 
+echo "Connection string: $connectionString"
+
 if [ ! -z "$query" ]; then
-    echo "Executing query: $query"
+    echo "Executing query: \"$query\""
     result=$(dotnet $KUSTO_CLI_PATH "$connectionString" \
         -execute:"#markdownon" \
         -execute:"$query")
