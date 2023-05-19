@@ -1,0 +1,12 @@
+.create-or-alter function with (
+    docstring = 'Returns the CPU SKU mappings for Azure VM Cores',
+    folder='Functions'
+)
+GetPeople()
+{
+    let people = datatable(FirstName: string, LastName: string, GitHubLogin: string)
+    [
+        "Philip", "Gai", "philip-gai"
+    ];
+    people
+}

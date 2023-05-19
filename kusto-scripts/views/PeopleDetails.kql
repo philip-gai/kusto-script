@@ -1,0 +1,10 @@
+.create-or-alter function with (
+    docstring = "Creates a view of PeopleDetails derived from the GetPeople function", 
+    folder = "Views", 
+    skipvalidation = "true"
+)
+PeopleDetails()
+{
+    GetPeople()
+    | extend GitHubUrl = strcat("https://github.com/", GitHubLogin)
+}

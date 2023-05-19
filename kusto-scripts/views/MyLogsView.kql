@@ -1,0 +1,9 @@
+.create-or-alter function with (
+    docstring = "Creates a view of MyLogs", 
+    folder = "Views", 
+    skipvalidation = "true"
+)
+MyLogsView()
+{
+    MyLogs
+}
