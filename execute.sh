@@ -47,7 +47,7 @@ echo "$result"
 
 if [ ! -z "$CI" ]; then
     # EOF needed for multiline output
-    echo "result=<<EOF" >>$GITHUB_OUTPUT
+    echo "result<<EOF" >>$GITHUB_OUTPUT
     echo "$result" >>$GITHUB_OUTPUT
     echo "EOF" >>$GITHUB_OUTPUT
 fi
