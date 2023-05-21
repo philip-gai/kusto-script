@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/philip-gai/kusto-script/actions/workflows/tests.yaml/badge.svg)](https://github.com/philip-gai/kusto-script/actions/workflows/tests.yaml)
 
-Run a Kusto script or inline query against your Kusto cluster in your GitHub Actions workflow.
+Run a Kusto script or inline query against your [Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/data-explorer-overview) cluster in your GitHub Actions workflow.
 
 ## Usage
 
